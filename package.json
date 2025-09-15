@@ -16,7 +16,7 @@
         "test": "vitest",
         "docs": "typedoc src/index.ts",
         "clean": "rm -rf dist",
-        "release": "bun run build && bun publish --dry-run"
+        "release": "bun run build && bun publish"
     },
     "keywords": [
         "printify",

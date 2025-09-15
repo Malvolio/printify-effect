@@ -27,10 +27,6 @@ export const runPrintifyTest = (
       Effect.provide(PrintifyConfigLayer),
       Effect.provide(FetchHttpClient.layer),
       Effect.scoped,
-      Effect.catchTag("ParseError", (e) => {
-        console.error("Parse Error:", JSON.stringify(e, null, 2));
-        return Effect.fail(e);
-      }),
       Effect.runPromise
     );
   } catch (error) {

@@ -4,7 +4,7 @@ export interface PrintifyConfig {
   readonly shopId: string;
   readonly accessToken: string;
   readonly timeout?: Duration.Duration;
-  readonly host?: string | undefined;
+  readonly host: Option.Option<string>;
   readonly enableLogging?: boolean;
 }
 
@@ -26,9 +26,7 @@ export const PrintifyConfigDefault = Effect.gen(function* () {
     })
   );
 
-  const host = yield* Config.string("PRINTIFY_HOST").pipe(
-    Config.withDefault(undefined)
-  );
+  const host = yield* Config.option(Config.string("PRINTIFY_HOST"));
   const enableLogging = yield* Config.boolean("PRINTIFY_ENABLE_LOGGING").pipe(
     Config.withDefault(false)
   );

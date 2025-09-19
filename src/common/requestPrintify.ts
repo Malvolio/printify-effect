@@ -1,6 +1,6 @@
 import { HttpBody, HttpClient, HttpClientRequest } from "@effect/platform";
 
-import { Console, Effect, pipe, Schema } from "effect";
+import { Console, Effect, Option, pipe, Schema } from "effect";
 import { PrintifyConfig } from "./config";
 import {
   ErrorResponseSchema,
@@ -52,7 +52,7 @@ export const requestPrintify = <A, E>(
     const processedUrl = path.replace("{shopId}", config.shopId);
 
     // Base Printify API URL
-    const baseUrl = config.host || "https://api.printify.com";
+    const baseUrl = Option.getOrElse(config.host, () => "https://api.printify.com");
     const fullUrl = `${baseUrl}${processedUrl}`;
 
     if (config.enableLogging) {
